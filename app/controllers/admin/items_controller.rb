@@ -12,4 +12,9 @@ class Admin::ItemsController < ApplicationController
 
   def edit
   end
+  
+  private
+  def item_params
+    params.require(:item).parmit(:genre_id, :name, :introduction, :price, :is_active, :image)
+  end
 end
