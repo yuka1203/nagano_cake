@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
     
-    def after_sign_in_path_for(resource)
-        admin_root_path
-    end
+    # def after_sign_in_path_for(resource)
+    #     admin_root_path
+    # end
     
-    def after_sign_out_path_for(resource)
-        admin_genres_path
-    end
-    
-    # get '/about' => 'homes#about'
+    # def after_sign_out_path_for(resource)
+    #     admin_genres_path
+    # end
     
     namespace :admin do
      root to: 'homes#top'
@@ -24,7 +22,14 @@ Rails.application.routes.draw do
     registrations: 'admin/registrations',
     confirmations: 'admin/confirmations'
     }
-  
-   get 'homes/top'
+    
+    devise_for :customers, controllers: {
+    sessions: 'customers/sessions',
+    passwords: 'customers/passwords',
+    registrations: 'customers/registrations',
+    confirmations: 'customers/confirmations'
+    }
+    
+    root to: 'homes#top'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
