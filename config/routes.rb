@@ -8,11 +8,14 @@ Rails.application.routes.draw do
         admin_genres_path
     end
     
+    # get '/about' => 'homes#about'
+    
     namespace :admin do
      root to: 'homes#top'
      resources :genres, only: [:new, :index, :create, :edit, :update]
      resources :items, only: [:new, :create, :index, :show, :edit, :update]
      resources :customers, only: [:index, :show, :edit, :update]
+     resources :orders, only: [:show, :update]
     end
   
     devise_for :admin, controllers: {
@@ -22,5 +25,6 @@ Rails.application.routes.draw do
     confirmations: 'admin/confirmations'
     }
   
+   get 'homes/top'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

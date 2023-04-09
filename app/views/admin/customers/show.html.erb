@@ -1,4 +1,4 @@
-<%= form_with mode: @customer, url: edit_admin_customer_path(@customer.id) do |f| %>
+<!--< form_with mode: @customer, url: edit_admin_customer_path(@customer.id) do |f| %>-->
 
 <h1><%= @customer.last_name %>
     <%= @customer.first_name %>さんの会員詳細</h1>
@@ -29,10 +29,15 @@
   <td><%= @customer.address %></td>
  </tr>
  <tr>
-     
+  <th>電話番号</th>
+  <td><%= @customer.telephone_number %></td>
+ </tr>
+ <tr>
+  <th>会員ステータス</th>
+  <td><%= @customer.is_deleted ? '有効': '退会' he %></td>
  </tr>
 </table>
  
- <%= f.submit '編集する' %>
+ <%= link_to '編集する', edit_admin_custome_path(customer.id) %>
  
-<% end %>
+<!--< end %>-->
