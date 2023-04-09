@@ -1,0 +1,38 @@
+<%= form_with mode: @customer, url: edit_admin_customer_path(@customer.id) do |f| %>
+
+<h1><%= @customer.last_name %>
+    <%= @customer.first_name %>さんの会員詳細</h1>
+
+<table>
+ <tr>
+  <th>会員ID</th>
+  <td><%= @customer.id %></td>
+ </tr>
+ <tr>
+  <th>氏名</th>
+  <td><%= @customer.last_name %></td>
+  <td> </td>
+  <td><%= @customer.first_name %></td>
+ </tr>
+ <tr>
+  <th>フリガナ</th>
+  <td><%= @customer.last_name_kana %></td>
+  <td> </td>
+  <td><%= @customer.first_name_kana %></td>
+ </tr>
+ <tr>
+  <th>郵便番号</th>
+  <td><%= @customer.postal_code %></td>
+ </tr>
+ <tr>
+  <th>住所</th>
+  <td><%= @customer.address %></td>
+ </tr>
+ <tr>
+     
+ </tr>
+</table>
+ 
+ <%= f.submit '編集する' %>
+ 
+<% end %>

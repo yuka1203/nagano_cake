@@ -6,10 +6,20 @@
  <%= f.submit '新規登録' %>
 <% end %>
 
-<h4>ジャンル</h4>
+<table>
+ <thead>
+  <tr>
+   <th>ジャンル</th>
+  </tr>
+ </thead>
 
-<% @genres.each do |genre| %>
-<span><%= genre.name %></span>
-<%= link_to "編集する", edit_admin_genre_path(genre.id) %>
-
-<% end %>
+ <tbody>
+  <% @genres.each do |genre| %>
+  
+  <tr>
+   <td><%= genre.name %></td>
+   <td><%= link_to "編集する", edit_admin_genre_path(genre.id) %></td>
+  </tr>
+  <% end %>
+ </tbody>
+</table>
