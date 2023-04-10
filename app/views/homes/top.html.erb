@@ -1,0 +1,28 @@
+
+<sidebar>
+    <% @genres.each do |genre| %>
+    <tr>
+        <th>ジャンル検索</th>
+    </tr>
+    <tr>
+        <td><%= genre.name %></td>
+    </tr>
+    <% end %>
+</sidebar>
+
+<main>
+    <div>ようこそ、ながのCAKEへ！<br>
+    このサイトは、ケーキ販売のECサイトになります。<br>
+    会員でない方も商品の閲覧はできますが、<br>
+    購入には会員登録が必要になります。</div>
+</main>
+
+    <h2>新着商品</h2>
+    
+    <% @items.each do |item| %>
+    
+    <%= item.image %>
+    <%= item.name %>
+    <%= item.price %>
+    
+    <% end %>

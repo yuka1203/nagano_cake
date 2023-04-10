@@ -24,12 +24,13 @@ Rails.application.routes.draw do
     }
     
     devise_for :customers, controllers: {
-    sessions: 'customers/sessions',
-    passwords: 'customers/passwords',
-    registrations: 'customers/registrations',
-    confirmations: 'customers/confirmations'
+    sessions: 'public/sessions',
+    passwords: 'public/passwords',
+    registrations: 'public/registrations',
+    confirmations: 'public/confirmations'
     }
     
     root to: 'homes#top'
+    get '/about' => 'homes#about'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
