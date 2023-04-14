@@ -34,9 +34,11 @@ Rails.application.routes.draw do
     scope module: :public do
     root to: 'homes#top'
     get '/about' => 'homes#about'
-    resources :customers, only: [:show, :edit, :update, :confirm, :widthdrawal]
+    resources :customers, only: [:show, :edit, :update]
     resources :items, only: [:show, :index]
-    resources :customers, only: [:show, :edit, :update, :confirm, :withdrawal]
+    resources :addresses, only: [:create, :destroy, :edit, :index, :update]
+    resources :cart_items, only: [:index, :update, :destroy]
+    resources :orders, only: [:new, :create, :index, :show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   end
   

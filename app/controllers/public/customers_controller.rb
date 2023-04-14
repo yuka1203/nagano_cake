@@ -1,6 +1,5 @@
 class Public::CustomersController < ApplicationController
   def show
-    @customer = Customer.
   end
 
   def edit
@@ -14,4 +13,5 @@ class Public::CustomersController < ApplicationController
 
   def withdrawal
   end
+  
 end

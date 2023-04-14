@@ -2,8 +2,11 @@
 
 <% @items.each do |item| %>
 
-<%= item.image %>
-<%= item.name %>
-<%= item.price %>
-
+<div>
+    <%=link_to items_path(item.id) do %>
+     <%= image_tag item.image %>
+    <% end %><br>
+    <%= item.name %><br>
+    <%= item.price %>
+</div>
 <% end %>

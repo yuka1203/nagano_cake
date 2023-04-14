@@ -1,7 +1,13 @@
-<%= image_tag @item.image %>
+<!--<= form_with model: @cart_item, url: cart_items_path, do |f| %>-->
 
-<%= @item.name %>
+<%= image_tag @item.image, (10,20) %>
 
-<%= @item.introduction %>
+<div>
+<%= @item.name %><br>
 
-<%= @item.price %>
+<%= @item.introduction %><br>
+
+¥<%= @item.price %>(税込)
+
+
+</div>

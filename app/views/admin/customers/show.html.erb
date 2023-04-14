@@ -34,10 +34,10 @@
  </tr>
  <tr>
   <th>会員ステータス</th>
-  <td><%= @customer.is_deleted ? '有効': '退会' he %></td>
+  <td><%= @customer.is_deleted ? '退会': '有効' %></td>
  </tr>
 </table>
  
- <%= link_to '編集する', edit_admin_custome_path(customer.id) %>
+ <%= link_to '編集する', edit_admin_customer_url(@customer.id) %>
  
 <!--< end %>-->
