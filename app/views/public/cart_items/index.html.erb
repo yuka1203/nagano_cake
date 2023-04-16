@@ -1,23 +1,55 @@
 <h1>ショッピングカート</h1>
 
-<% @cart_items.each do |cart_item| %>
- <tr>
-     <th>商品名</th>
-     <th>単価</th>
-     <th>数量</th>
-     <th>小計</th>
-     <th></th>
- </tr>
- <tr>
-     <td><%= image_tag cart_item.image %></td>
-     <td><%= item.name %></td>
-     <td><%= item.price %></td>
-     <td><%= cart_items.amount %></td>
-     <td></td>
-     <td></td>
- </tr>
-<% end %>
+<table>
+ <thead>
+  <tr>
+   <th>商品名</th>
+   <th>単価</th>
+   <th>数量</th>
+   <th>小計</th>
+   <th></th>
+  </tr>
+ </thead>
+ 
+ <tbody>
+ <% total = 0 %>
+ <!--合計金額のtotalの初期化-->
+ 
+ <% if current_customer.cart_items.present? %>
+  <% @cart_items.each do |cart_item| %>
+   <tr>
+     <td><%= image_tag cart_item.item.get_image(100,200) %></td>
+     <td><%= cart_item.item.name %></td>
+     <td><%= cart_item.item.with_tax_price %></td>
+     <td>
+      <%#= form_with model: cart_item, url: cart_item_path(cart_item), method:  :patch do |f| %>
+       <%#= f.number_field :amount, ,min: 1, max: 10, id: "amount_cart" %>
+       <%#= f.submit "変更" %>
+     <%#= cart_items.amount %>
+      <%# end %>
+     </td>
+     <td>
+      <%= cart_item.item.subtotal %>
+      
+     </td>
+     <td>
+      <%= link_to "削除する", cart_item_path(cart_item.id, cart_item), method: :delete %>
+     </td>
+    </tr>
+     <% total += cart_item.subtotal %>
+  <% end %>
+ <% end %>
+ 
+ </tbody>
+   
+    
+</table>
+  <%= link_to "買い物を続ける", items_path %>
+  <tr>
+   <th>合計金額</th>
+   <td><%= total %></td>
+  </tr>
 
-<div>買い物を続ける</div>
-<div>合計金額</div>
-<div>情報入力に進む</div>
+<%= link_to "情報入力に進む", new_order_path %>
+
+

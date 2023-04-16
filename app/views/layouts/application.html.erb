@@ -30,6 +30,9 @@
       <% else %>
   <!--// user側のheaderを返す-->
         <p>user header</p>
+        <%= link_to destroy_customer_session_path, method: :delete do %>
+          ログアウト
+        <% end %>
       <% end %>
      
     </header>

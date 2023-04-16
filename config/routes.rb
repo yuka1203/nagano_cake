@@ -37,9 +37,11 @@ Rails.application.routes.draw do
     resources :customers, only: [:show, :edit, :update]
     resources :items, only: [:show, :index]
     resources :addresses, only: [:create, :destroy, :edit, :index, :update]
-    resources :cart_items, only: [:index, :update, :destroy]
+    resources :cart_items, only: [:create, :index, :update, :destroy]
     resources :orders, only: [:new, :create, :index, :show]
+    post '/orders/confirm' => 'orders#confirm'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+#   　get '/complete' => 'orders#complete'
   end
   
 end
