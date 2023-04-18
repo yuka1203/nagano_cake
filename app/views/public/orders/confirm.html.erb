@@ -20,32 +20,35 @@
             <td><%= order.subtotal %></td>
         </tr>
     </tbody>
+</table>
 <table>
    <tr>
        <th>送料</th>
-       <td><%#= order.shipping_cost %></td>
+       <td><%= @shipping_cost %></td>
    </tr>
    <tr>
        <th>商品合計</th>
-       <% total = order.subtotal %>
-       <td><%= total %></td>
+       <%# @total +=  order.subtotal %>
+       <td><%#= @total %></td>
    </tr>
    <tr>
        <th>請求金額</th>
-       <td><%= total + 100 %></td>
+       <td><%#= @total + @shipping_cost %></td>
    </tr>
 </table>
-    <% end %>
-</table>
+        <% end %> 
 
 <div>支払い方法</div>
-<%#= @order.payment_method %>
+<%= @order.payment_i18n %>
 
 
 <div>お届け先</div>
+<%= @order.shipping_postal_code + @order.shipping_address + @order.shipping_name %>
 
-<%= form_with model: @order, url: orders_complete_path, method: :post do |f| %>
+<%= form_with model: @order, url: orders_path, method: :post do |f| %>
 
-<%= submit_tag "注文を確定する" %>
+<%= hidden_field :payment, :value => @order.payment %>
+
+<%= f.submit "注文を確定する" %>
 
 <% end %>
