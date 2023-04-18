@@ -1,8 +1,8 @@
 class CartItem < ApplicationRecord
     
     has_many :order
-    has_many :item
-    belongs_to :customers
+    belongs_to :item
+    belongs_to :customer
     
     def subtotal
         item.with_tax_price*amount
