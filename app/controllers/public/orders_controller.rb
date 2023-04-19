@@ -5,7 +5,9 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
+    @orders = Order.all
     @cart_items = current_customer.cart_items.all
+    @total = 0
     @shipping_cost = 800
     if params[:order][:address_select] == "0"
      @order.shipping_postal_code = current_customer.postal_code
@@ -27,15 +29,11 @@ class Public::OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.save
-    # 商品があるかどうかif文で分岐させる
-    if CartItem.find_by()
-      # ある場合は個数をフォームから送られた個数分追加する
-    else
-    # 　カートモデルにレコードを新規作成する
-    end
+    redirect_to orders_complete_path
   end
 
   def index
+    @order = Order.all
   end
 
   def show

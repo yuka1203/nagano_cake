@@ -34,7 +34,11 @@ Rails.application.routes.draw do
     scope module: :public do
     root to: 'homes#top'
     get '/about' => 'homes#about'
-    resources :customers, only: [:show, :edit, :update]
+    get 'customers/mypage' => 'customers#show'
+    get 'customers/information/edit' => 'customers#edit'
+    patch 'customers/information' => 'customers#update'
+    get 'customers/confirm' => 'customers#confirm'
+    patch 'customers/withdrawal' => 'customers#withdrawal'
     resources :items, only: [:show, :index]
     resources :addresses, only: [:create, :destroy, :edit, :index, :update]
     resources :cart_items, only: [:create, :index, :update, :destroy]
@@ -42,7 +46,6 @@ Rails.application.routes.draw do
     post '/orders/confirm' => 'orders#confirm'
     post '/orders/complete' => 'orders#complete'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-#   　get '/complete' => 'orders#complete'
   end
   
 end

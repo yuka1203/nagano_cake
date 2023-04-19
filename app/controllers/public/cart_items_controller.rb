@@ -12,7 +12,7 @@ class Public::CartItemsController < ApplicationController
       cart_item.save
       redirect_to cart_items_path
     elsif @cart_item.save!
-          render 'index'
+      render 'index'
     else
       render 'index'
     end
