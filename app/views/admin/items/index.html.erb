@@ -1,7 +1,8 @@
 <h1>商品一覧</h1>
 
+<%= link_to "+", new_admin_item_path %>
+
 <table>
-    <% @items.each do |item| %>
     <thead>
      <tr>
        <th>商品ID</th>
@@ -11,6 +12,7 @@
        <th>ステータス</th>
      </tr>
     </thead>
+    <% @items.each do |item| %>
     <tbody>
      <tr>
         <td><%= item.id %></td>
@@ -24,3 +26,5 @@
     </tbody>
     <% end %>
 </table>
+    
+<%= paginate @items %>
