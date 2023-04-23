@@ -39,12 +39,12 @@ Rails.application.routes.draw do
     patch 'customers/information' => 'customers#update'
     get 'customers/confirm' => 'customers#confirm'
     patch 'customers/withdrawal' => 'customers#withdrawal'
+    post '/orders/confirm' => 'orders#confirm'
+    get '/orders/complete' => 'orders#complete'
     resources :items, only: [:show, :index]
     resources :addresses, only: [:create, :destroy, :edit, :index, :update]
     resources :cart_items, only: [:create, :index, :update, :destroy]
     resources :orders, only: [:new, :create, :index, :show]
-    post '/orders/confirm' => 'orders#confirm'
-    post '/orders/complete' => 'orders#complete'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   end
   
