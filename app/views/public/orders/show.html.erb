@@ -5,7 +5,7 @@
 <table>
     <tr>
         <th>注文日</th>
-        <td><%= @order.created_at %></td>
+        <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
     </tr>
     <tr>
         <th>配送先</th>
@@ -52,9 +52,12 @@
         <th>小計</th>
     </tr>
     
-    <% @orders.each do |f| %>
+    <% @order.order_details.each do |order_detail| %>
     <tr>
-        <td><%= @orders.item_id %></td>
+        <td><%= order_detail.item.name %></td>
+        <td><%= order_detail.item.with_tax_price %></td>
+        <td><%= order_detail.amount %></td>
+        <td><%= order_detail.total_price %></td>
     </tr>
     <% end %>
 </table>

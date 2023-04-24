@@ -50,7 +50,6 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @orders = CartItem.all
   end
   
   private
