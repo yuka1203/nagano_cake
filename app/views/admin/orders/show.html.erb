@@ -1,17 +1,56 @@
-<h1>注文履歴詳細</h1>
+<div class="container mx-auto">
+    <div class="row">
+        <div class="col-3 offset-md-1 text-center mb-3">
+        　<div class="text-dark" style="background-color:#DDDDDD">注文履歴詳細</div>
+        </div>
 
-<div>購入者</div>
-<div><%#= @order_details.%></div>
-  
-    <% @orders.each do |order| %>
-    <tbody>
-        <tr>
-            <td><%= order.created_at %></td>
-            <td><%#= order.order_id.customer_1.last_name + " " + order.order_id.customer_1.first_name %></td>
-            <td><%= order.amount%></td>
-            <td><%= order.making_status %></td>
-        </tr>
-    </tbody>
-    <% end %>
-</table>
-
+        <div class="row">
+　　　　<table>
+　　　　    <tr>
+　　　　        <th>購入者</th>
+　　　　        <td>
+　　　　            <%= link_to admin_customer_path do %>
+　　　　             <%= @order.customer.last_name + " " + @order.customer.first_name %>
+　　　　            <% end %>
+　　　　        </td>
+　　　　    </tr>
+　　　　    <tr>
+　　　　        <th>注文日</th>
+　　　　        <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+　　　　    </tr>
+　　　　    <tr>
+　　　　        <th>配送先</th>
+　　　　        <td>
+　　　　            <%= "〒" + @order.shipping_postal_code.slice(0..2) + "-" + @order.shipping_postal_code.slice(3..6) %>
+　　　　            <%= @order.shipping_address %><br>
+　　　　            <%= @order.shipping_name %>
+　　　　        </td>
+　　　　    </tr>
+　　　　    <tr>
+　　　　        <th>支払方法</th>
+　　　　        <td><%= @order.payment_i18n %></td>
+　　　　    </tr>
+　　　　  
+　　　　        <th>注文ステータス</th>
+　　　　        <td>
+　　　　            <%= form_with model: @order, url: admin_root_path(@order.id) do |f| %>
+　　　　             <%= f.select :status, Order.statuses_i18n.keys.map{|k| [I18n.t("enums.order.status.#{k}"), k]} %>
+　　　　            <%= f.submit "更新", class: "btn btn-success" %>
+　　　　            <% end %>
+　　　　        </td>
+　　　　    
+　　　　    
+    <%# @orders.each do |order| %>
+    <!--<tbody>-->
+    <!--    <tr>-->
+            <%#= order.created_at %>
+            <%#= order.customer.last_name + " " + order.customer.first_name %>
+            <%#= order.amount%> 
+            <%#= order.making_status %>
+    <!--    </tr>-->
+    <!--</tbody>-->
+    <%# end %>
+          </table>
+        </div>
+  </div>
+</div>

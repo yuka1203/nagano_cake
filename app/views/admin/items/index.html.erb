@@ -1,30 +1,50 @@
-<h1>商品一覧</h1>
+<div class="container mx-auto">
+    <div class="row">
+        <div class="col-3 offset-md-1 text-center">
+        　<div class="text-dark" style="background-color:#DDDDDD">商品一覧</div>
+        </div>
 
-<%= link_to "+", new_admin_item_path %>
-
-<table>
-    <thead>
-     <tr>
-       <th>商品ID</th>
-       <th>商品名</th>
-       <th>税抜価格</th>
-       <th>ジャンル</th>
-       <th>ステータス</th>
-     </tr>
-    </thead>
-    <% @items.each do |item| %>
-    <tbody>
-     <tr>
-        <td><%= item.id %></td>
-        <td><%= link_to admin_item_url(item.id) do %>
-            <p><%= item.name %></p>
-        <% end %></td>
-        <td><%= item.price %></td>
-        <td><%= item.genre.name %></td>
-        <td><%= item.is_active ? '販売中':'販売停止中' %></td>
-     </tr>
-    </tbody>
-    <% end %>
-</table>
-    
-<%= paginate @items %>
+　　    <div class="offset-10 text-center">
+　　       <%= link_to "+", new_admin_item_path, class: "btn btn-light rounded-circle shadow" %> 
+　　    </div>
+　　</div>
+　　
+　　<div class="col-md-10 offset-md-1">
+            <table class="table">
+                <thead class="thead" style="background-color:#DDDDDD">
+                    <tr>
+                        <th>商品ID</th>
+                        <th>商品名</th>
+                        <th>税抜価格</th>
+                        <th>ジャンル</th>
+                        <th>ステータス</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <% @items.each do |item| %>
+                    <tr>
+                        <td><%= item.id %></td>
+                        <td><%= link_to admin_item_url(item.id) do  %>
+                            <p class="text-dark"><%= item.name %></p>
+                            <% end %>
+                        </td>
+                        <td><%= item.price %></td>
+                        <td><%= item.genre.name %></td>
+                        <!--<td><%#= item.is_active ? '販売中' :'販売停止中' %></td>-->
+                        <td><% if item.is_active == true %>
+                             <p class="text-success"><%= '販売中' %></p>
+                            <% else %>
+                             <p class="text-secondary"><%= '販売停止中' %></p>
+                            <% end %>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            
+            <div class="col-4 offset-4 text-center"
+            <%= paginate @items %>
+            
+    </div>
+</div>
