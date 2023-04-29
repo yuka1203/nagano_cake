@@ -1,7 +1,7 @@
 class Public::ItemsController < ApplicationController
   def index
     @count = Item.count
-    @items = Item.page(params[:page])
+    @items = Item.page(params[:page]).limit(8)
   end
 
   def show

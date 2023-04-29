@@ -3,54 +3,74 @@
         <div class="col-3 offset-md-1 text-center mb-3">
         　<div class="text-dark" style="background-color:#DDDDDD">注文履歴詳細</div>
         </div>
-
-        <div class="row">
-　　　　<table>
-　　　　    <tr>
-　　　　        <th>購入者</th>
-　　　　        <td>
-　　　　            <%= link_to admin_customer_path do %>
-　　　　             <%= @order.customer.last_name + " " + @order.customer.first_name %>
-　　　　            <% end %>
-　　　　        </td>
-　　　　    </tr>
-　　　　    <tr>
-　　　　        <th>注文日</th>
-　　　　        <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
-　　　　    </tr>
-　　　　    <tr>
-　　　　        <th>配送先</th>
-　　　　        <td>
-　　　　            <%= "〒" + @order.shipping_postal_code.slice(0..2) + "-" + @order.shipping_postal_code.slice(3..6) %>
-　　　　            <%= @order.shipping_address %><br>
-　　　　            <%= @order.shipping_name %>
-　　　　        </td>
-　　　　    </tr>
-　　　　    <tr>
-　　　　        <th>支払方法</th>
-　　　　        <td><%= @order.payment_i18n %></td>
-　　　　    </tr>
-　　　　  
-　　　　        <th>注文ステータス</th>
-　　　　        <td>
-　　　　            <%= form_with model: @order, url: admin_root_path(@order.id) do |f| %>
-　　　　             <%= f.select :status, Order.statuses_i18n.keys.map{|k| [I18n.t("enums.order.status.#{k}"), k]} %>
-　　　　            <%= f.submit "更新", class: "btn btn-success" %>
-　　　　            <% end %>
-　　　　        </td>
+    </div>
+    
+    <div class="row">
+        <div class="col-8 offset-md-1 text-left mb-3">
+            <table>
+                <tr>
+                    <th>購入者</th>
+                    <td>
+                        <%= link_to admin_customer_path do %>
+　　　　                <%= @order.customer.last_name + " " + @order.customer.first_name %>
+　　　　                <% end %>
+　　　　            </td>
+　　　　        </tr>
+　　　　        <tr>
+　　　　            <th>注文日</th>
+　　　　            <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+　　　　        </tr>
+　　　　        <tr>
+　　　　            <th>配送先</th>
+　　　　            <td>
+　　　　                <%= "〒" + @order.shipping_postal_code.slice(0..2) + "-" + @order.shipping_postal_code.slice(3..6) %>
+　　　　                <%= @order.shipping_address %><br>
+　　　　                <%= @order.shipping_name %>
+　　　　            </td>
+　　　　        </tr>
+　　　　        <tr>
+　　　　            <th>支払方法</th>
+　　　　            <td><%= @order.payment_i18n %></td>
+　　　　    　　</tr>
+　　　　    　　<tr>
+　　　　    　　    <th>注文ステータス</th>
+　　　　    　　    <td>
+　　　　                <%= form_with model: @order, url: admin_root_path(@order.id) do |f| %>
+　　　　                <%= f.select :status, Order.statuses_i18n.keys.map{|k| [I18n.t("enums.order.status.#{k}"), k]} %>
+　　　　                <%= f.submit "更新", class: "btn btn-success" %>
+　　　　                <% end %>
+　　　　            </td>
+　　　　        </tr>
+　　　　    </table>
+　　　　</div>
+　　　</div>
 　　　　    
-　　　　    
-    <%# @orders.each do |order| %>
-    <!--<tbody>-->
-    <!--    <tr>-->
-            <%#= order.created_at %>
-            <%#= order.customer.last_name + " " + order.customer.first_name %>
-            <%#= order.amount%> 
-            <%#= order.making_status %>
-    <!--    </tr>-->
-    <!--</tbody>-->
-    <%# end %>
-          </table>
+　　　<div class-"row">
+　　　    <div class="col-8 offset-md-1">
+　　　        <table class="table">
+　　　            <thead class="thead" style="background-color:#DDDDDD">
+　　　                <tr>
+　　　                    <th>商品名</th>
+　　　                    <th>単価（税込）</th>
+　　　                    <th>数量</th>
+　　　                    <th>小計</th>
+　　　                    <!--<th>製作ステータス</th>-->
+　　　                </tr>
+　　　            </thead>
+　　　                
+　　　            <tbody>
+　　　               <% @orders.each do |order| %>
+　　　               <tr>
+　　　                       <% order.order_details.each do |order_detail| %>
+　　　                   <td><%= order_detail.item.name %></td>
+　　　                   <td><%= order_detail.item.with_tax_price %></td>
+　　　                   <td><%= order_detail.amount %></td>
+　　　                   <td><%= order_detail.total_price %></td>
+　　　                       <% end %>
+　　　               </tr>
+　　　               <% end %>
+                  </tbody>
+                </table>
+            </div>
         </div>
-  </div>
 </div>

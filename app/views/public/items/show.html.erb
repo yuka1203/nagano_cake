@@ -1,18 +1,17 @@
-<!--< if @item.is_active == TRUE %> 商品販売中の場合-->
-
+<div class="container">
  <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
-
-  <%= image_tag @item.get_image(100,200) %>
-
-  <div>
-   <%= @item.name %><br>
-   <%= @item.introduction %><br>
-   ¥<%= @item.price %>(税込)
-  </div>
-
-  <%= f.select :amount, *[1..10] %>
-  <%= f.hidden_field :item_id, :value => @item.id %>
-  <%= f.submit "カートに入れる" %>
- <% end %>
+    <div class="row mb-3">
+        <div class="col-md-4 offset-md-1">
+         <%= image_tag @item.get_image(300,300) %>
+        </div>
+        <div class-"col-md-4 offset-md-1">
+         <h4><strong><%= @item.name %></strong></h4><br>
+         <%= @item.introduction %><br>
+         <strong>¥<%= @item.price %>(税込)</strong><br>
+         <%= f.select :amount, *[1..10] %>
+         <%= f.hidden_field :item_id, :value => @item.id %>
+         <%= f.submit "カートに入れる" %>
+         <% end %>
+        </div>
 <!--< end %>-->
     
