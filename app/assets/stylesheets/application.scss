@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+.top_image{
+    background-image: url('/assets/images/top.jpg');
+    width: 400px;
+    height: 300px;
+}

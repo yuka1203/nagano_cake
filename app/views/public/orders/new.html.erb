@@ -1,0 +1,59 @@
+<div class="container mx-auto">
+    <div class="row">
+        <div class="col-3 offset-md-1 text-center">
+        　<div class="text-dark" style="background-color:#DDDDDD">注文情報入力</div>
+        </div>
+    </div>
+    
+    <div class="row">
+     <div class="col-md-10 offset-md-1">
+      <%= form_with model: @order, url: orders_confirm_path, method: :post do |f| %>
+      
+     <p><strong>支払い方法</strong></p>
+      <%= f.radio_button :payment, Order.payments.key(0) %>
+　    <%= f.label :payment, Order.payments_i18n[:credit_card] %><br>
+      <%= f.radio_button :payment, Order.payments.key(1) %>
+　    <%= f.label :payment, Order.payments_i18n[:transfer] %>
+　    
+     <p><strong>お届け先</strong></p>
+        <div>
+           <%= f.radio_button :address_select, 0 %>
+           <%= f.label :address_select, "ご自身の住所" %><br>
+　         <%= current_customer.postal_code %>
+　         <%= current_customer.address %><br>
+　         <%= current_customer.last_name + " " + current_customer.first_name %>
+　      </div>
+　      <div>
+           <%= f.radio_button :address_select, 1 %>
+           <%= f.label :address_select, "登録済住所から選択" %><br>
+           <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
+        </div>
+        <div>
+           <%= f.radio_button :address_select, 2 %>
+           <%= f.label :address_select, "新しいお届け先" %><br>
+         <tr>
+          　<div>
+             <th>郵便番号（ハイフンなし）</th>
+             <td><%= f.text_field :shipping_postal_code, placeholder:"0000000" %></td>
+            </div>
+         </tr><br>
+         <tr>
+            <div>
+             <th>住所</th>
+             <td><%= f.text_field :shipping_address, placeholder:"東京都渋谷区代々木神園町0-0", :size=>"60" %></td>
+            </div>
+         </tr><br>
+         <tr>
+             <th>宛名</th>
+             <td><%= f.text_field :shipping_name, placeholder:"令和道子" %></td>
+         </tr><br>
+        </div>
+      </div>
+　   </div>
+　   <div class="row">
+　    <div class="col-md-4 offset-4">
+　     <%= f.submit "確認画面へ進む", class: "btn btn-primary" %> 
+　    </div>
+　   </div>
+    <% end %>
+ </div>
