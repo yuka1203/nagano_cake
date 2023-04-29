@@ -59,16 +59,14 @@
 　　　            </thead>
 　　　                
 　　　            <tbody>
-　　　               <% @orders.each do |order| %>
+　　　                 <% @order.order_details.each do |order_detail| %>
 　　　               <tr>
-　　　                       <% order.order_details.each do |order_detail| %>
 　　　                   <td><%= order_detail.item.name %></td>
 　　　                   <td><%= order_detail.item.with_tax_price %></td>
 　　　                   <td><%= order_detail.amount %></td>
 　　　                   <td><%= order_detail.total_price %></td>
-　　　                       <% end %>
 　　　               </tr>
-　　　               <% end %>
+　　　                <% end %>
                   </tbody>
                 </table>
             </div>
